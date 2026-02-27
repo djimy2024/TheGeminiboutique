@@ -1,7 +1,8 @@
-// 1️⃣ Fonksyon pou chaje orders yo
+const BASE_URL = "https://perfume-store-abc123.onrender.com";
+
 function loadOrders(start = "", end = "") {
 
-    let url = "/api/orders";
+    let url = BASE_URL + "/api/orders";
 
     if (start && end) {
         url += `?start=${start}&end=${end}`;
@@ -12,7 +13,7 @@ function loadOrders(start = "", end = "") {
         .then(data => {
 
             const table = document.getElementById("ordersTable");
-            table.innerHTML = ""; // netwaye table la
+            table.innerHTML = "";
 
             let totalRevenue = 0;
             let totalQuantity = 0;
@@ -47,28 +48,20 @@ function loadOrders(start = "", end = "") {
         });
 }
 
-
-// 2️⃣ Delete order (GLOBAL)
 function deleteOrder(id) {
 
     if (!confirm("Are you sure you want to delete this order?")) return;
 
-    fetch("/api/orders/" + id, {
+    fetch(BASE_URL + "/api/orders/" + id, {
         method: "DELETE"
     })
-    .then(() => loadOrders()); // refresh table san reload paj
+    .then(() => loadOrders());
 }
 
-
-// 3️⃣ Filter pa dat (GLOBAL)
 function filter() {
-
     const start = document.getElementById("startDate").value;
     const end = document.getElementById("endDate").value;
-
     loadOrders(start, end);
 }
 
-
-// 4️⃣ Chaje orders otomatikman lè paj la ouvri
 loadOrders();
