@@ -90,6 +90,62 @@ th {
     text-align: center;
 }
 
+.footer {
+    background-color: #3F3D56; /* Deep Indigo */
+    color: #fff;
+    padding: 20px 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    width: 120px;
+    height: auto;
+}
+
+.footer-contact a {
+    color: #4FC3F7; /* Neon Blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-contact a:hover {
+    text-decoration: underline;
+}
+
+.footer-payments p {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.footer-payments img {
+    width: 50px;
+    height: auto;
+    margin: 0 10px;
+    vertical-align: middle;
+    transition: transform 0.3s;
+}
+
+.footer-payments img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    border-top: 1px solid #555;
+    padding-top: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
+
 
 @media (max-width: 1024px) {
     .products-container {

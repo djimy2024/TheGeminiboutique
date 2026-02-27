@@ -1,4 +1,4 @@
-const BASE_URL = "https://perfume-store-abc123.onrender.com";
+const BASE_URL = "https://thegeminiboutique.onrender.com";
 
 function loadOrders(start = "", end = "") {
 
