@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Perfume Store - Admin Dashboard</h1>
+
+<div class="stats">
+    <div class="card">
+        <h3>Total Orders</h3>
+        <p id="totalOrders">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Products Sold</h3>
+        <p id="totalQuantity">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Revenue</h3>
+        <p id="totalRevenue">$0</p>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody id="ordersTable"></tbody>
+</table>
+
+<input type="date" id="startDate">
+<input type="date" id="endDate">
+<button onclick="filter()">Filter</button>
+
+<a href="/export">
+    <button>Export Excel</button>
+</a>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
