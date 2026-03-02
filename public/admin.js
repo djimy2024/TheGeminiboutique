@@ -2,60 +2,66 @@ const BASE_URL = "https://thegeminiboutique.onrender.com";
 
 function loadOrders(start = "", end = "") {
 
-    let url = BASE_URL + "/api/orders";
+    let url = "/api/orders";
 
     if (start && end) {
         url += `?start=${start}&end=${end}`;
     }
 
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
+   fetch(url, {
+    credentials: "include"
+})
+.then(res => res.json())
+.then(data => {
 
-            const table = document.getElementById("ordersTable");
-            table.innerHTML = "";
+    if (!Array.isArray(data)) {
+        console.error("Not authorized or wrong response:", data);
+        return;
+    }
 
-            let totalRevenue = 0;
-            let totalQuantity = 0;
+    const table = document.getElementById("ordersTable");
+    table.innerHTML = "";
 
-            document.getElementById("totalOrders").textContent = data.length;
+    let totalRevenue = 0;
+    let totalQuantity = 0;
 
-            data.forEach(order => {
+    document.getElementById("totalOrders").textContent = data.length;
 
-                const row = `
-                    <tr>
-                        <td>${order.id}</td>
-                        <td>${order.product}</td>
-                        <td>$${order.price}</td>
-                        <td>${order.quantity}</td>
-                        <td>${order.date}</td>
-                        <td>
-                            <button onclick="deleteOrder(${order.id})">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                `;
+    data.forEach(order => {
+        const row = `
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.product}</td>
+                <td>$${order.price}</td>
+                <td>${order.quantity}</td>
+                <td>${order.date}</td>
+                <td>
+                    <button onclick="deleteOrder(${order.id})">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        `;
 
-                table.innerHTML += row;
+        table.innerHTML += row;
 
-                totalRevenue += order.price * order.quantity;
-                totalQuantity += order.quantity;
-            });
+        totalRevenue += order.price * order.quantity;
+        totalQuantity += order.quantity;
+    });
 
-            document.getElementById("totalRevenue").textContent = "$" + totalRevenue;
-            document.getElementById("totalQuantity").textContent = totalQuantity;
-        });
+    document.getElementById("totalRevenue").textContent = "$" + totalRevenue;
+    document.getElementById("totalQuantity").textContent = totalQuantity;
+});
 }
 
 function deleteOrder(id) {
 
     if (!confirm("Are you sure you want to delete this order?")) return;
 
-    fetch(BASE_URL + "/api/orders/" + id, {
-        method: "DELETE"
-    })
-    .then(() => loadOrders());
+    fetch("/api/orders/" + id, {
+    method: "DELETE"
+})
+.then(() => loadOrders());
 }
 
 function filter() {

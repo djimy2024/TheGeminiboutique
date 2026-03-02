@@ -5,7 +5,10 @@ const session = require("express-session");
 const ExcelJS = require("exceljs");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://djimy2024.github.io",  // mete URL GitHub Pages ou
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.static("public"));
 
